@@ -24,7 +24,7 @@ class ntp::params {
     'AIX','Debian','RedHat','SuSE','FreeBSD','Archlinux','Gentoo' : {
       $conf = hiera("ntp_${::osfamily}_conf")
       $config       = $conf['config']
-      $keys_file     = $conf['keysfile']
+      $keys_file    = $conf['keysfile']
       $driftfile    = $conf['driftfile']
       $package_name = $conf['package_name']
       $restrict     = $conf['restrict']

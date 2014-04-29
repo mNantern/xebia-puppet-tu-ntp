@@ -50,9 +50,31 @@ class ntp (
   # mess everything up.  You can read about this at:
   # http://docs.puppetlabs.com/puppet/2.7/reference/lang_containment.html#known-issues
   anchor { 'ntp::begin': } ->
-  class { '::ntp::install': } ->
-  class { '::ntp::config': } ~>
-  class { '::ntp::service': } ->
+  class { 'ntp::install': 
+    package_ensure => $package_ensure,
+    package_name   => $package_name
+  } ->
+  class { 'ntp::config': 
+    config            => $config,
+    config_template   => $config_template,
+    disable_monitor   => $disable_monitor,
+    driftfile         => $driftfile,
+    keys_enable       => $keys_enable,
+    keys_file         => $keys_file,
+    keys_controlkey   => $keys_controlkey,
+    keys_requestkey   => $keys_requestkey,
+    keys_trusted      => $keys_trusted,
+    panic             => $panic,
+    preferred_servers => $preferred_servers,
+    restrict          => $restrict,
+    servers           => $servers,
+    udlc              => $udlc
+  } ~>
+  class { 'ntp::service': 
+    service_ensure => $service_ensure,
+    service_manage => $service_manage,
+    service_name   => $service_name
+  } ->
   anchor { 'ntp::end': }
 
 }
