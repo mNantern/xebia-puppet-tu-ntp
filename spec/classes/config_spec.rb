@@ -15,7 +15,7 @@ describe 'ntp::config' do
           'owner'   => 0,
           'group'   => 0,
           'mode'    => '0644',
-          'content' => /pool.ntp.org/
+          'content' => /pool\.ntp\.org/
         )
       end
     end
